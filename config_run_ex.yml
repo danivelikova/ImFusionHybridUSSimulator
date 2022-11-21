@@ -1,0 +1,12 @@
+iws_file : USHybridSim_auto_generate_imgs_masks.iws
+labelmap_with_catheter_meshes_f :
+labelmap_aorta_catheter :
+save_dir_us_sim :
+save_dir_us_sim_imgs :
+save_dir_us_sim_masks :
+splines_file :
+folder_catheter_data_path:
+nr_imgs:
+nr_labelmap:
+
+
