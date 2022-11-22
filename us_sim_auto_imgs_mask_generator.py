@@ -16,7 +16,7 @@ SAVE_DIR_US_SIM = hparams.save_dir_us_sim
 placeholders = ['CT', 'NrImgs', 'InputLabelMap', 'OutputSweep', 'OutputSweepMask', 'Output2dImgsDir', 'Output2dMasksDir', 'InputMaskVolume',
                 'TransdSpline', 'DirSpline']
 
-FOLDER_CATH_DATA = hparams.folder_catheter_data_path
+FOLDER_CATH_DATA = hparams.base_folder_data_path
 sub_folders_cath = [sub_f for sub_f in sorted(os.listdir(FOLDER_CATH_DATA))]
 folder_catheter_data = [FOLDER_CATH_DATA + s for s in sub_folders_cath]
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
             trans_splines.append(l.split(";")[0])
             dir_splines.append(l.split(";")[1])
 
-        folder_full_labelmaps = folder + hparams.labelmap_with_catheter_meshes_f
+        folder_full_labelmaps = folder + hparams.full_labelmap_path
         labelmaps = sorted(os.listdir(folder_full_labelmaps), reverse=True)
 
         for _ in range(hparams.nr_labelmap):
@@ -75,7 +75,7 @@ if __name__ == "__main__":
                             if p == 'Output2dMasksDir':
                                 value = output_2d_masks_dir
                             if p == 'InputMaskVolume':
-                                value = folder + hparams.labelmap_aorta_catheter + full_labelmap
+                                value = folder + hparams.input_labelmap_path + full_labelmap
                             if p == 'TransdSpline':
                                 value = '"' + transd_spline + '"'
                             if p == 'DirSpline':

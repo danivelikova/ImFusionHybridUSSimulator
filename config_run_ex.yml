@@ -1,12 +1,12 @@
+base_folder_data_path:  #path to this repo
 iws_file : USHybridSim_auto_generate_imgs_masks.iws
-labelmap_with_catheter_meshes_f :
-labelmap_aorta_catheter :
-save_dir_us_sim :
-save_dir_us_sim_imgs :
-save_dir_us_sim_masks :
-splines_file :
-folder_catheter_data_path:
-nr_imgs:
-nr_labelmap:
+full_labelmap_path : /data/full_labelmaps/
+input_labelmap_path : /data/aorta_labelmaps/
+save_dir_us_sim :  #path where to save the results
+save_dir_us_sim_imgs : imgs/
+save_dir_us_sim_masks : masks/
+splines_file : /data/splines_3dir.csv
+nr_imgs: 100
+nr_labelmap: 100
 
 
