@@ -13,13 +13,13 @@ parser, hparams = build_configargparser(parser)
 
 SAVE_DIR_US_SIM = hparams.save_dir_us_sim
 
-placeholders = ['CT', 'NrImgs', 'InputLabelMap', 'OutputSweep', 'OutputSweepMask', 'Output2dImgsDir', 'Output2dMasksDir', 'InputMaskVolume',
+placeholders = ['CT', 'NrImgs', 'InputLabelMap', 'OutputSweep', 'OutputSweepMask', 'Output2dImgsDir',
+                'Output2dMasksDir', 'InputMaskVolume',
                 'TransdSpline', 'DirSpline']
 
 FOLDER_CATH_DATA = hparams.base_folder_data_path
 sub_folders_cath = [sub_f for sub_f in sorted(os.listdir(FOLDER_CATH_DATA))]
 folder_catheter_data = [FOLDER_CATH_DATA + s for s in sub_folders_cath]
-
 
 if __name__ == "__main__":
 
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         labelmaps = sorted(os.listdir(folder_full_labelmaps), reverse=True)
 
         for _ in range(hparams.nr_labelmap):
-            i = random.randint(0, len(labelmaps))  #get random labelmaps
+            i = random.randint(0, len(labelmaps))  # get random labelmaps
             full_labelmap = labelmaps[i]
 
             folder_output_sweep = folder + SAVE_DIR_US_SIM + full_labelmap.split('.')[0] + '_' + '.imf'
@@ -59,6 +59,7 @@ if __name__ == "__main__":
 
                         values = []
                         arguments = ""
+                        spline_nr = str(t_nr) + '_' + str(d_nr)
                         for p in placeholders:
                             if p == 'NrImgs':
                                 value = str(hparams.nr_imgs)
@@ -67,11 +68,12 @@ if __name__ == "__main__":
                             if p == 'InputLabelMap':
                                 value = folder_full_labelmaps + full_labelmap
                             if p == 'OutputSweep':
-                                value = folder + SAVE_DIR_US_SIM + 'sweep_' + full_labelmap.split('.')[0] + '.imf'
+                                value = folder + SAVE_DIR_US_SIM + 'sweep_' + full_labelmap.split('.')[
+                                    0] + '_' + spline_nr + '.imf'
                             if p == 'OutputSweepMask':
-                                value = folder_output_sweep
+                                value = folder_output_sweep.split('.')[0] + spline_nr + '_' + '.imf'
                             if p == 'Output2dImgsDir':
-                                value = output_2d_imgs_dir + full_labelmap.split('.')[0]
+                                value = output_2d_imgs_dir + full_labelmap.split('.')[0] + '_' + spline_nr
                             if p == 'Output2dMasksDir':
                                 value = output_2d_masks_dir
                             if p == 'InputMaskVolume':
@@ -85,5 +87,3 @@ if __name__ == "__main__":
                         print('ARGUMENTS: ', arguments)
                         os.system("ImFusionConsole" + " " + hparams.iws_file + " " + arguments)
                         print('################################################### ')
-
-
